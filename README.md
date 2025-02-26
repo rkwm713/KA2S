@@ -1,11 +1,11 @@
-# Katapult to SPIDAcal Transformer
+# Katapult to SPIDAcalc Transformer
 
-A browser-based tool to transform JSON exports from Katapult Pro (schema v9) to SPIDAcal-compatible format (schema v10).
+A browser-based tool to transform JSON exports from Katapult Pro (schema v9) to SPIDAcalc-compatible format (schema v10).
 
 ## Features
 
 - **Schema Upgrade**: Automatically converts from v9 to v10 schema
-- **Missing Fields**: Adds required fields for successful SPIDAcal import
+- **Missing Fields**: Adds required fields for successful SPIDAcalc import
 - **Wire Properties**: Adds missing wire sizes and properties
 - **Browser-based**: No installation required, works entirely in your browser
 - **Privacy-focused**: All processing happens locally, no data is sent to servers
@@ -15,7 +15,7 @@ A browser-based tool to transform JSON exports from Katapult Pro (schema v9) to 
 1. **Upload Files**: Drag and drop your JSON files or use the file browser
 2. **Configure Defaults**: Set default values for wire sizes and properties
 3. **Process Files**: Transform your JSON files to SPIDAcal v10 format
-4. **Download Results**: Get your transformed files ready for SPIDAcal import
+4. **Download Results**: Get your transformed files ready for SPIDAcalc import
 
 ## Requirements
 
@@ -41,14 +41,10 @@ To run this project locally:
 
 No build tools or server required!
 
-## GitHub Pages Deployment
-
-This project is designed to be easily deployed on GitHub Pages. Simply push to your repository and enable GitHub Pages in the repository settings.
-
 
 
 ## Acknowledgments
 
 - TechServ for project support
-- SPIDAcal documentation for schema references
+- SPIDAcalc documentation for schema references
 - Monster Energy Drink for the willpower
