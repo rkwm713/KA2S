@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katapult to SPIDAcal Transformer</title>
+  
+  <!-- Import fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Import CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Katapult to SPIDAcal Transformer</h1>
+      <p>Transform JSON exports from Katapult Pro v9 to SPIDAcal v10 format</p>
+    </div>
+  </header>
+  
+  <div class="container">
+    <div class="alert alert-info">
+      <p>This tool helps you transform Katapult Pro JSON exports by upgrading from schema v9 to v10 and adding missing fields required by SPIDAcal, such as wire sizes and properties.</p>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <div class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+        </div>
+        <h2>Upload Files</h2>
+      </div>
+      
+      <div id="dropZone" class="drop-zone">
+        <div class="drop-zone-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        </div>
+        <p class="drop-zone-text">Drag and drop JSON files here or click to browse</p>
+        <button class="button">Select Files</button>
+        <input type="file" id="fileInput" class="file-input" accept=".json" multiple>
+      </div>
+      
+      <div id="fileListContainer" style="display: none;">
+        <h3>Selected Files</h3>
+        <ul id="fileList" class="file-list"></ul>
+        <div style="margin-top: var(--spacing-md);">
+          <button id="processButton" class="button">Process Files</button>
+          <button id="clearButton" class="button button-secondary">Clear</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card default-values-section">
+      <div class="settings-toggle" id="settingsToggle">
+        <h3>Default Values</h3>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+      
+      <div class="settings-content" id="settingsContent">
+        <div class="form-group">
+          <h4>Primary Wire</h4>
+          <div class="form-group">
+            <label for="primaryWireSize">Size</label>
+            <input type="text" id="primaryWireSize" class="form-control" value="2/0 ACSR">
+          </div>
+          <div class="form-group">
+            <label for="primaryWireDiameter">Diameter (inches)</label>
+            <input type="number" id="primaryWireDiameter" class="form-control" value="0.447" step="0.001">
+          </div>
+          <div class="form-group">
+            <label for="primaryWireWeight">Weight (lbs/ft)</label>
+            <input type="number" id="primaryWireWeight" class="form-control" value="0.366" step="0.001">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <h4>Neutral Wire</h4>
+          <div class="form-group">
+            <label for="neutralWireSize">Size</label>
+            <input type="text" id="neutralWireSize" class="form-control" value="#2 ACSR">
+          </div>
+          <div class="form-group">
+            <label for="neutralWireDiameter">Diameter (inches)</label>
+            <input type="number" id="neutralWireDiameter" class="form-control" value="0.316" step="0.001">
+          </div>
+          <div class="form-group">
+            <label for="neutralWireWeight">Weight (lbs/ft)</label>
+            <input type="number" id="neutralWireWeight" class="form-control" value="0.181" step="0.001">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <h4>Secondary Open Wire</h4>
+          <div class="form-group">
+            <label for="secondaryOpenWireSize">Size</label>
+            <input type="text" id="secondaryOpenWireSize" class="form-control" value="4/0 ACSR">
+          </div>
+          <div class="form-group">
+            <label for="secondaryOpenWireDiameter">Diameter (inches)</label>
+            <input type="number" id="secondaryOpenWireDiameter" class="form-control" value="0.563" step="0.001">
+          </div>
+          <div class="form-group">
+            <label for="secondaryOpenWireWeight">Weight (lbs/ft)</label>
+            <input type="number" id="secondaryOpenWireWeight" class="form-control" value="0.646" step="0.001">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="tab-container">
+        <div class="tabs">
+          <div class="tab active" data-tab="results">Results</div>
+          <div class="tab" data-tab="logs">Logs</div>
+        </div>
+        
+        <div class="tab-content active" id="results">
+          <div id="resultsContainer">
+            <p>No files processed yet. Upload and process files to see results here.</p>
+          </div>
+        </div>
+        
+        <div class="tab-content" id="logs">
+          <div class="logOutput" id="logOutput">
+            <div class="log-entry">
+              <span class="log-timestamp">[10:45:23]</span>
+              <span class="log-info">Waiting for files...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+    <div class="container">
+      <p>Katapult to SPIDAcal Transformer &copy; 2025</p>
+    </div>
+  </footer>
+  
+  <!-- Import JavaScript -->
+  <script src="js/transformer.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
