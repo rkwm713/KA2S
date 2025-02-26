@@ -45,11 +45,10 @@ No build tools or server required!
 
 This project is designed to be easily deployed on GitHub Pages. Simply push to your repository and enable GitHub Pages in the repository settings.
 
-## License
 
-MIT License
 
 ## Acknowledgments
 
 - TechServ for project support
 - SPIDAcal documentation for schema references
+- Monster Energy Drink for the willpower
